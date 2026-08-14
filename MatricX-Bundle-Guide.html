@@ -1,0 +1,295 @@
+<meta charset="utf-8">
+<title>MatricX Bundle — Official Guide</title>
+<style>
+  :root{
+    --bg:#111111; --panel:#1b1b1b; --panel2:#202020; --line:#2e2e2e;
+    --text:#d8d8d8; --dim:#9a9a9a; --head:#ffffff; --accent:#f26722; --code:#ffb98a;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  .topbar{height:8px;background:var(--accent)}
+  .page{max-width:900px;margin:0 auto;padding:0 40px 80px}
+
+  /* ---------- cover ---------- */
+  .cover{min-height:70vh;display:flex;flex-direction:column;justify-content:center;padding:60px 0}
+  .cover h1{font-size:76px;line-height:1;margin:0;color:var(--head);letter-spacing:-2px;font-weight:800}
+  .cover h1 .pro{
+    display:inline-block;background:var(--accent);color:#fff;font-size:30px;font-weight:800;
+    padding:10px 22px;border-radius:8px;vertical-align:middle;margin-left:18px;letter-spacing:1px;
+  }
+  .rule{height:3px;background:var(--accent);width:540px;max-width:100%;margin:22px 0 18px}
+  .cover h2{font-size:23px;font-weight:400;color:var(--text);margin:0 0 6px}
+  .cover .sub{color:var(--dim);font-size:15px;margin:0}
+  .badges{margin:44px 0 26px;display:flex;gap:12px;flex-wrap:wrap}
+  .badge{background:#262626;color:var(--dim);padding:11px 20px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:.5px}
+  .badge.on{background:var(--accent);color:#fff}
+  .byline{color:var(--dim);font-size:14px}
+  .byline a,.byline b{color:var(--accent);font-weight:600}
+
+  /* ---------- structure ---------- */
+  section{padding-top:52px}
+  .kicker{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:2.2px;margin:0 0 6px}
+  h2.sec{font-size:38px;color:var(--head);margin:0 0 6px;font-weight:700;letter-spacing:-.5px}
+  h2.sec + .rule{width:100px;height:4px;margin:14px 0 26px}
+  h3{font-size:21px;color:var(--head);margin:34px 0 10px;font-weight:650}
+  h4{font-size:16px;color:var(--accent);margin:24px 0 6px;font-weight:700}
+  p{margin:0 0 14px}
+  ul,ol{margin:0 0 16px;padding-left:22px}
+  li{margin:5px 0}
+  ul{list-style:none;padding-left:20px}
+  ul li{position:relative}
+  ul li::before{content:"●";color:var(--accent);position:absolute;left:-18px;font-size:9px;top:6px}
+  ol li::marker{color:var(--accent);font-weight:700}
+  code{background:#262626;color:var(--code);padding:2px 7px;border-radius:4px;font-size:13.5px;
+       font-family:"SF Mono",Consolas,Monaco,monospace}
+  .path{display:block;background:#1a1a1a;border-left:3px solid var(--accent);
+        padding:14px 18px;margin:0 0 16px;color:var(--code);white-space:pre;
+        font-family:"SF Mono",Consolas,Monaco,monospace;font-size:13px;overflow-x:auto}
+
+  /* ---------- contents ---------- */
+  .toc{margin-top:8px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .toc a{display:flex;gap:18px;padding:13px 20px;color:var(--text);text-decoration:none;
+         border-bottom:1px solid var(--line);font-weight:600;font-size:15px}
+  .toc a:last-child{border-bottom:none}
+  .toc a:nth-child(odd){background:var(--panel)}
+  .toc a:nth-child(even){background:var(--panel2)}
+  .toc a span{color:var(--accent);font-weight:800;min-width:26px}
+  .toc a em{color:var(--dim);font-style:normal;font-weight:400;margin-left:auto;font-size:13px}
+
+  /* ---------- callouts ---------- */
+  .note,.warn,.new{border-left:3px solid var(--accent);background:var(--panel);
+        padding:14px 18px;margin:0 0 18px;border-radius:0 6px 6px 0}
+  .note b,.warn b,.new b{color:var(--accent)}
+  .warn{border-left-color:#e0483c}
+  .warn b{color:#ff6a5e}
+  .new{border-left-color:#3ea76a}
+  .new b{color:#4fc281}
+  .note p:last-child,.warn p:last-child,.new p:last-child{margin-bottom:0}
+
+  /* ---------- tables ---------- */
+  table{width:100%;border-collapse:collapse;margin:0 0 20px;font-size:14px}
+  th{background:#252525;color:var(--head);text-align:left;padding:11px 14px;
+     font-size:12px;letter-spacing:.8px;text-transform:uppercase;border-bottom:2px solid var(--accent)}
+  td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:nth-child(even) td{background:var(--panel)}
+  td b{color:var(--head)}
+  .yes{color:#4fc281;font-weight:700}
+  .no{color:#6d6d6d}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+  @media (max-width:760px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px 18px}
+  .card h4{margin-top:0}
+
+  .kbd{display:inline-block;background:#2b2b2b;border:1px solid #3a3a3a;border-bottom-width:2px;
+       border-radius:5px;padding:2px 9px;font-size:13px;color:var(--head);font-weight:600}
+
+  hr.div{border:none;border-top:1px solid var(--line);margin:56px 0 0}
+  footer{color:#666;font-size:12px;text-align:center;padding:60px 0 20px;border-top:1px solid var(--line);margin-top:60px}
+
+  @page{ size:A4; margin:0; }
+  @media print{
+    html,body{
+      background:var(--bg) !important;
+      -webkit-print-color-adjust:exact; print-color-adjust:exact;
+    }
+    .topbar{display:none}
+    .page{max-width:none;padding:14mm 16mm}
+    .cover{min-height:auto;padding:26mm 0 0}
+    .cover h1{font-size:58px}
+    section{page-break-before:always;padding-top:0}
+    .card,.note,.warn,.new,.path{page-break-inside:avoid}
+    thead{display:table-header-group}
+    .toc{page-break-inside:avoid}
+    .toc a{padding:8.5px 18px;font-size:13.5px}
+    h2.sec,h3,h4{page-break-after:avoid}
+    tr{page-break-inside:avoid}
+    a{color:var(--accent);text-decoration:none}
+    footer{page-break-before:always}
+  }
+</style>
+<div class="topbar"></div>
+<div class="page">
+
+<!-- ============================= COVER ============================= -->
+<div class="cover">
+  <h1>MATRICX<span class="pro">BUNDLE</span></h1>
+  <div class="rule"></div>
+  <h2>Official Guide</h2>
+  <p class="sub">MatricX Pro + MatricX Bake &middot; one combined workflow</p>
+
+  <div class="badges">
+    <span class="badge on">BLENDER ADD-ONS</span>
+    <span class="badge">PRO + BAKE</span>
+    <span class="badge">4 LICENSE TIERS</span>
+  </div>
+  <p class="byline">Created by <b>Prasanth / Eidos Edge</b><br>
+     Requires Blender 4.5+ &mdash; MatricX Pro tested through 5.2, MatricX Bake tested through 5.2</p>
+</div>
+
+<!-- ============================= CONTENTS ============================= -->
+<section id="contents">
+  <p class="kicker">CONTENTS</p>
+  <h2 class="sec">What's Inside</h2>
+  <div class="rule"></div>
+  <div class="toc">
+    <a href="#whats-included"><span>01</span> What's in the Bundle</a>
+    <a href="#install"><span>02</span> Install both add-ons</a>
+    <a href="#workflow"><span>03</span> The combined workflow</a>
+    <a href="#pro-ref"><span>04</span> MatricX Pro quick reference</a>
+    <a href="#bake-ref"><span>05</span> MatricX Bake quick reference</a>
+    <a href="#tiers"><span>06</span> Bundle license tiers</a>
+    <a href="#fulldocs"><span>07</span> Full documentation and support</a>
+  </div>
+</section>
+
+<!-- ============================= WHAT'S INCLUDED ============================= -->
+<section id="whats-included">
+  <p class="kicker">SECTION 01</p>
+  <h2 class="sec">What's in the Bundle</h2>
+  <div class="rule"></div>
+
+  <p>The MatricX Bundle includes both MatricX Pro and MatricX Bake, in full. Every bundle tier includes the complete feature set of each add-on &mdash; higher tiers add licensing scope, support, and collaboration, not extra core features.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>MatricX Pro</h4>
+      <p>Build the surface. 55 premade materials, custom material presets, 15 imperfection types, paint masks, decals &amp; trim sheets, and live mapping compensation.</p>
+    </div>
+    <div class="card">
+      <h4>MatricX Bake</h4>
+      <p>Bake the textures. Clean PBR maps from any material, one shared texture set, robust bake UVs, ORM/ARM/RMA packing, decal baking, and FBX/GLB export.</p>
+    </div>
+  </div>
+
+  <div class="note"><p>This guide is a quick reference for using both add-ons together. For the complete, detailed documentation of each add-on individually, see <a href="#fulldocs" style="color:var(--accent)">Section 07</a>.</p></div>
+</section>
+
+<!-- ============================= INSTALL ============================= -->
+<section id="install">
+  <p class="kicker">SECTION 02</p>
+  <h2 class="sec">Install Both Add-ons</h2>
+  <div class="rule"></div>
+
+  <p>MatricX Pro and MatricX Bake are installed the same way, and independently of each other &mdash; each is provided as two ZIP formats.</p>
+
+  <table>
+    <tr><th>Package</th><th>Use For</th><th>Install Path</th></tr>
+    <tr><td><b>MatricX_Pro.zip</b></td><td>Classic Blender addon install.</td><td>Edit &gt; Preferences &gt; Add-ons &gt; Install</td></tr>
+    <tr><td><b>MatricX_Pro_Extension.zip</b></td><td>Blender Extension style install.</td><td>Edit &gt; Preferences &gt; Add-ons &gt; Install from Disk</td></tr>
+    <tr><td><b>MatricX_Bake_1.6.2.zip</b></td><td>Classic Blender addon install.</td><td>Edit &gt; Preferences &gt; Add-ons &gt; Install</td></tr>
+    <tr><td><b>MatricX_Bake_1.6.2_Extension.zip</b></td><td>Blender Extension style install.</td><td>Edit &gt; Preferences &gt; Add-ons &gt; Install from Disk</td></tr>
+  </table>
+
+  <div class="note"><p>Both add-ons can be installed and enabled at the same time with no conflicts. MatricX Pro is opened from <code>3D View &gt; Sidebar &gt; MatricX</code>, and MatricX Bake from <code>3D View &gt; Sidebar &gt; MatricX Bake</code>.</p></div>
+
+  <h3>Supported Blender Versions</h3>
+  <div class="badges" style="margin:8px 0 20px">
+    <span class="badge on">Blender 4.5+</span>
+    <span class="badge on">Blender 5.0+</span>
+    <span class="badge on">5.1 tested</span>
+    <span class="badge on">5.2 tested</span>
+  </div>
+</section>
+
+<!-- ============================= WORKFLOW ============================= -->
+<section id="workflow">
+  <p class="kicker">SECTION 03</p>
+  <h2 class="sec">The Combined Workflow</h2>
+  <div class="rule"></div>
+
+  <p>MatricX Pro and MatricX Bake are built to work as one continuous pipeline, not two separate tools you happen to own.</p>
+
+  <ol>
+    <li><b style="color:var(--head)">Build the surface in MatricX Pro</b> &mdash; apply a material, layer in imperfections, paint masks where needed, add decals or trim sheets.</li>
+    <li><b style="color:var(--head)">Bake it in MatricX Bake</b> &mdash; select the object or collection, prepare UVs if needed, choose your bake maps, and bake. MatricX Bake automatically preserves MatricX Pro's procedural imperfection placement, so the baked result matches what you built.</li>
+    <li><b style="color:var(--head)">Export</b> &mdash; package the model, textures, and an asset manifest as FBX or GLB, ready for your game engine.</li>
+  </ol>
+
+  <div class="new"><p><b>Why this matters:</b> MatricX Pro's imperfection layers frequently use Object or Generated coordinates inside nested node groups. MatricX Bake stores each source object's original coordinates and substitutes them only on temporary copies, so dirt, wear, noise, and bump masks keep their original placement when baked. Your source materials and node groups are never modified.</p></div>
+</section>
+
+<!-- ============================= PRO QUICK REFERENCE ============================= -->
+<section id="pro-ref">
+  <p class="kicker">SECTION 04</p>
+  <h2 class="sec">MatricX Pro Quick Reference</h2>
+  <div class="rule"></div>
+
+  <table>
+    <tr><th>Workspace</th><th>Purpose</th></tr>
+    <tr><td><b>Materials</b></td><td>Apply and edit the 55 premade materials, or design and save your own custom presets.</td></tr>
+    <tr><td><b>Decals</b></td><td>Place, project, scale, rotate, and recolor decals; fit trim sheet regions to selected faces.</td></tr>
+    <tr><td><b>Viewport</b></td><td>Live mapping tools &mdash; Live Scale and Live Rotation Compensation keep procedural textures aligned as you transform an object.</td></tr>
+  </table>
+
+  <h3>Imperfection Studio</h3>
+  <p>15 imperfection types across four groups: Tone &amp; Finish, Edges &amp; Damage, Scratches &amp; Marks, and Dirt &amp; Weathering. Layers stack, reorder, and composite &mdash; and any layer can be hand-painted with Paint Masks instead of relying on a procedural mask alone.</p>
+
+  <div class="note"><p>For the complete MatricX Pro reference &mdash; every material category, every imperfection type, and full panel documentation &mdash; see <a href="#fulldocs" style="color:var(--accent)">Section 07</a>.</p></div>
+</section>
+
+<!-- ============================= BAKE QUICK REFERENCE ============================= -->
+<section id="bake-ref">
+  <p class="kicker">SECTION 05</p>
+  <h2 class="sec">MatricX Bake Quick Reference</h2>
+  <div class="rule"></div>
+
+  <table>
+    <tr><th>Panel Section</th><th>Purpose</th></tr>
+    <tr><td><b>Prepare Mesh</b></td><td>Create or repair UVs before baking. Auto-Fix Bake UVs detects and corrects unsafe layouts automatically.</td></tr>
+    <tr><td><b>Material Bake</b></td><td>Bake Base Color, Roughness, Metallic, Normal, AO, Emission, Opacity, and Height &mdash; from simple or complex node materials.</td></tr>
+    <tr><td><b>Bake Scene Decals</b></td><td>Bake decal meshes into the active target's UVs.</td></tr>
+    <tr><td><b>Combine Decal &amp; Material</b></td><td>Blend material maps and decal maps into a new PBR material.</td></tr>
+    <tr><td><b>Final Bake</b></td><td>Flatten the current material into export-friendly maps.</td></tr>
+    <tr><td><b>Game Asset Export</b></td><td>Package the model, textures, and an asset manifest as FBX or GLB.</td></tr>
+  </table>
+
+  <h3>One Texture Set</h3>
+  <p>Bake selected objects, collections, or visible objects into one shared atlas instead of a separate texture set per object &mdash; using Pack Existing Islands, Rebuild Shared Atlas, or Use Existing UVs.</p>
+
+  <div class="note"><p>For the complete MatricX Bake reference &mdash; map packing modes, troubleshooting, and full panel documentation &mdash; see <a href="#fulldocs" style="color:var(--accent)">Section 07</a>.</p></div>
+</section>
+
+<!-- ============================= LICENSE TIERS ============================= -->
+<section id="tiers">
+  <p class="kicker">SECTION 06</p>
+  <h2 class="sec">Bundle License Tiers</h2>
+  <div class="rule"></div>
+
+  <table>
+    <tr><th>Tier</th><th>Price</th><th>Includes</th></tr>
+    <tr><td><b>Creator Bundle</b></td><td>$119</td><td>MatricX Pro + MatricX Bake, lifetime updates.</td></tr>
+    <tr><td><b>Pro Bundle</b></td><td>$209</td><td>Everything in Creator Bundle, plus priority support, faster updates &amp; bug fixes, and insider tips &amp; workflows.</td></tr>
+    <tr><td><b>Studio Bundle</b></td><td>$399</td><td>Everything in Pro Bundle, plus a multi-seat license (up to 10), custom workflow advice, and early access to new features across both add-ons.</td></tr>
+    <tr><td><b>Enterprise Bundle</b></td><td>$569</td><td>Everything in Studio Bundle, plus custom feature requests, dedicated onboarding, direct roadmap influence, and a branding spotlight in the showcase.</td></tr>
+  </table>
+
+  <div class="note"><p>All four tiers include the complete feature set of both add-ons. Higher tiers add support, licensing scope, and collaboration &mdash; not additional core functionality.</p></div>
+</section>
+
+<!-- ============================= FULL DOCS ============================= -->
+<section id="fulldocs">
+  <p class="kicker">SECTION 07</p>
+  <h2 class="sec">Full Documentation and Support</h2>
+  <div class="rule"></div>
+
+  <p>This guide covers the bundle at a glance. For the complete reference of each add-on:</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>MatricX Pro</h4>
+      <p><a href="https://jack-hardsurface.github.io/MatricX-Pro-Page/MatricX-PRO-User-Guide.html" style="color:var(--accent)">Read the full MatricX Pro documentation &rarr;</a></p>
+    </div>
+    <div class="card">
+      <h4>MatricX Bake</h4>
+      <p><a href="https://jack-hardsurface.github.io/MatricX-Bake-Page/MatricX-Bake-User-Guide.html" style="color:var(--accent)">Read the full MatricX Bake documentation &rarr;</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>MatricX Bundle &middot; Official Guide &middot; MatricX Pro + MatricX Bake</footer>
+
+</div>
