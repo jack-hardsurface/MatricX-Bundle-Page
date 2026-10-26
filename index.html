@@ -322,15 +322,15 @@ footer a:hover { color: var(--orange); }
 }
 
 /* Bundle tiers */
-.tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; align-items: stretch; }
+.tiers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; align-items: stretch; }
 .tier { display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 24px 20px; }
 .tier.featured { border: 2px solid var(--orange); box-shadow: 0 20px 60px rgba(242,103,34,.15); }
 .tier .flag { align-self: flex-start; background: var(--orange); color: #111; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700;
   letter-spacing: 1.5px; padding: 4px 9px; border-radius: 4px; margin-bottom: 12px; }
 .tier h3 { font-size: 24px; }
 .tier .who { color: #8f8f8f; font-size: 13.5px; margin: 4px 0 14px; }
-.tier .price { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
-.tier .price .now { font-family: 'Anton', Impact, sans-serif; font-size: 46px; color: var(--head); line-height: 1; }
+.tier .price { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 10px; margin-bottom: 4px; }
+.tier .price .now { font-family: 'Anton', Impact, sans-serif; font-size: clamp(30px, 3.2vw, 40px); color: var(--head); line-height: 1.05; }
 .tier .price .was { font-size: 18px; color: #6f6f6f; text-decoration: line-through; font-weight: 600; }
 .tier .save { color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 700; letter-spacing: 1px; margin-bottom: 16px; }
 .tier .ticks { flex: 1; margin: 0 0 20px; }
@@ -339,7 +339,7 @@ footer a:hover { color: var(--orange); }
 .included { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .included .spec h3 span { color: var(--orange); }
 .included .spec .more { display: inline-block; margin-top: 16px; font-weight: 700; text-decoration: none; }
-@media (max-width: 960px) { .tiers { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 960px) { .tiers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 860px) { .included { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .tiers { grid-template-columns: 1fr; } }
 </style>
@@ -347,7 +347,7 @@ footer a:hover { color: var(--orange); }
 <body>
 
 <div class="offerbar" role="note">
-  Launch offer: <b>38% off</b> every MatricX Bundle tier &mdash; Creator from <b>$74</b> <s>$119</s>
+  Launch offer: <b>38% off</b> every MatricX Bundle tier &mdash; Creator from <b>$67.58</b> <s>$109</s>
   <a href="#tiers">See the tiers</a>
 </div>
 
@@ -362,7 +362,7 @@ footer a:hover { color: var(--orange); }
       <a href="#faq">FAQ</a>
       <a href="https://jack-hardsurface.github.io/">All add-ons</a>
     </nav>
-    <a href="#tiers" class="btn btn-small">From $74</a>
+    <a href="#tiers" class="btn btn-small">From $67.58</a>
   </div>
 </header>
 
@@ -381,9 +381,9 @@ footer a:hover { color: var(--orange); }
            alt="A weapon finished with MatricX PRO materials and imperfections."></div>
     </div>
     <div class="cta-row">
-      <a href="#tiers" class="btn btn-large">Get the Bundle &mdash; from $74</a>
+      <a href="#tiers" class="btn btn-large">Get the Bundle &mdash; from $67.58</a>
     </div>
-    <p class="price-line"><s>$119</s><span class="now">$74</span><span class="off">LAUNCH PRICE &middot; 38% OFF</span></p>
+    <p class="price-line"><s>$109</s><span class="now">$67.58</span><span class="off">LAUNCH PRICE &middot; 38% OFF</span></p>
 
     <div class="stats" role="list">
       <div class="stat" role="listitem"><div class="num">70</div><div class="lbl">Ready-made materials</div></div>
@@ -485,7 +485,7 @@ footer a:hover { color: var(--orange); }
       <div class="tier featured">
         <h3>Creator</h3>
         <p class="who">For individual artists</p>
-        <div class="price"><span class="now">$74</span><span class="was">$119</span></div>
+        <div class="price"><span class="now">$67.58</span><span class="was">$109</span></div>
         <div class="save">LAUNCH PRICE &middot; 38% OFF</div>
         <ul class="ticks">
           <li>MatricX PRO: materials, imperfections, decals, viewport tools</li>
@@ -497,7 +497,7 @@ footer a:hover { color: var(--orange); }
       <div class="tier">
         <h3>Pro</h3>
         <p class="who">For working professionals</p>
-        <div class="price"><span class="now">$130</span><span class="was">$209</span></div>
+        <div class="price"><span class="now">$197.16</span><span class="was">$318</span></div>
         <div class="save">LAUNCH PRICE &middot; 38% OFF</div>
         <ul class="ticks">
           <li>Everything in Creator</li>
@@ -510,7 +510,7 @@ footer a:hover { color: var(--orange); }
       <div class="tier">
         <h3>Studio</h3>
         <p class="who">For small studios and teams</p>
-        <div class="price"><span class="now">$247</span><span class="was">$399</span></div>
+        <div class="price"><span class="now">$487.32</span><span class="was">$786</span></div>
         <div class="save">LAUNCH PRICE &middot; 38% OFF</div>
         <ul class="ticks">
           <li>Everything in Pro</li>
@@ -523,7 +523,7 @@ footer a:hover { color: var(--orange); }
       <div class="tier">
         <h3>Enterprise</h3>
         <p class="who">For larger teams</p>
-        <div class="price"><span class="now">$353</span><span class="was">$569</span></div>
+        <div class="price"><span class="now">$1,540.70</span><span class="was">$2,485</span></div>
         <div class="save">LAUNCH PRICE &middot; 38% OFF</div>
         <ul class="ticks">
           <li>Everything in Studio</li>
@@ -535,7 +535,7 @@ footer a:hover { color: var(--orange); }
         <a href="#tiers" class="btn" data-store-picker>Get Enterprise</a>
       </div>
     </div>
-    <p class="caption" style="color:#8f8f8f">Pick your tier in the store's selector. Launch prices are rounded to the nearest dollar.</p>
+    <p class="caption" style="color:#8f8f8f">Pick your tier in the store's selector.</p>
   </section>
 
   <!-- FAQ -->
@@ -559,7 +559,7 @@ footer a:hover { color: var(--orange); }
       </details>
       <details>
         <summary>Is the launch price permanent?</summary>
-        <div class="answer"><p>No. The launch offer takes 38% off every tier for a limited time. Regular prices are $119, $209, $399 and $569.</p></div>
+        <div class="answer"><p>No. The launch offer takes 38% off every tier for a limited time. Regular prices are $109, $318, $786 and $2,485.</p></div>
       </details>
       <details>
         <summary>Which Blender versions are supported?</summary>
@@ -577,7 +577,7 @@ footer a:hover { color: var(--orange); }
     <div class="kicker center">MatricX Bundle</div>
     <h2>Create More.<br>Ship Faster.</h2>
     <p style="color:#a0a0a0; margin-bottom: 12px;">Build the surface in MatricX PRO, bake it clean in MatricX Bake, export it ready for your engine.</p>
-    <p class="final-price"><s>$119</s><b>$74</b>launch price, Creator tier</p>
+    <p class="final-price"><s>$109</s><b>$67.58</b>launch price, Creator tier</p>
     <div class="cta-row">
       <a href="#tiers" class="btn btn-large" data-store-picker>Get the Bundle</a>
     </div>
