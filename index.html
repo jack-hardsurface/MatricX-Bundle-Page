@@ -351,6 +351,12 @@ footer a:hover { color: var(--orange); }
 .home-link .short { display: none; }
 @media (max-width: 520px) { .home-link .long { display: none; } .home-link .short { display: inline; } .topbar-inner { gap: 14px; } }
 @media (max-width: 860px) { .topbar-inner > .btn { margin-left: auto; } }
+
+/* Small link to the other stores (store picker); hidden inside a store listing */
+.other-stores { display: inline-flex; align-items: center; min-height: 44px; margin-top: 6px; font-size: 13.5px; color: #9a9a9a;
+  text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+.other-stores:hover { color: var(--head); }
+.other-stores[hidden] { display: none; }
 </style>
 </head>
 <body>
@@ -501,7 +507,7 @@ footer a:hover { color: var(--orange); }
           <li>MatricX Bake: game-ready texture sets and export</li>
           <li>Lifetime updates</li>
         </ul>
-        <a href="#tiers" class="btn" data-store-picker>Get Creator</a>
+        <a href="https://eidosedge.gumroad.com/l/MatricXUltimateBundle" target="_blank" rel="noopener" class="btn" data-store-picker>Get Creator</a>
       </div>
       <div class="tier">
         <h3>Pro</h3>
@@ -514,7 +520,7 @@ footer a:hover { color: var(--orange); }
           <li>Faster updates &amp; bug fixes</li>
           <li>Insider tips &amp; workflows</li>
         </ul>
-        <a href="#tiers" class="btn" data-store-picker>Get Pro</a>
+        <a href="https://eidosedge.gumroad.com/l/MatricXUltimateBundle" target="_blank" rel="noopener" class="btn" data-store-picker>Get Pro</a>
       </div>
       <div class="tier">
         <h3>Studio</h3>
@@ -527,7 +533,7 @@ footer a:hover { color: var(--orange); }
           <li>Custom workflow advice</li>
           <li>Early access to new features in both add-ons</li>
         </ul>
-        <a href="#tiers" class="btn" data-store-picker>Get Studio</a>
+        <a href="https://eidosedge.gumroad.com/l/MatricXUltimateBundle" target="_blank" rel="noopener" class="btn" data-store-picker>Get Studio</a>
       </div>
       <div class="tier">
         <h3>Enterprise</h3>
@@ -541,10 +547,10 @@ footer a:hover { color: var(--orange); }
           <li>Direct roadmap influence</li>
           <li>Branding spotlight in the showcase</li>
         </ul>
-        <a href="#tiers" class="btn" data-store-picker>Get Enterprise</a>
+        <a href="https://eidosedge.gumroad.com/l/MatricXUltimateBundle" target="_blank" rel="noopener" class="btn" data-store-picker>Get Enterprise</a>
       </div>
     </div>
-    <p class="caption" style="color:#8f8f8f">Pick your tier in the store's selector.</p>
+    <p class="caption" style="color:#8f8f8f">Pick your tier on the store page. <a class="other-stores" href="https://superhivemarket.com/products/matricx-bundle-save-30---complete-material--baking-system" target="_blank" rel="noopener" data-other-stores>Other stores: Blender Market &middot; Payhip</a></p>
   </section>
 
   <!-- FAQ -->
@@ -588,7 +594,7 @@ footer a:hover { color: var(--orange); }
     <p style="color:#a0a0a0; margin-bottom: 12px;">Build the surface in MatricX PRO, bake it clean in MatricX Bake, export it ready for your engine.</p>
     <p class="final-price"><s>$109</s><b>$67.58</b>launch price, Creator tier</p>
     <div class="cta-row">
-      <a href="#tiers" class="btn btn-large" data-store-picker>Get the Bundle</a>
+      <a href="https://eidosedge.gumroad.com/l/MatricXUltimateBundle" target="_blank" rel="noopener" class="btn btn-large" data-store-picker>Get the Bundle</a>
     </div>
   </section>
 
@@ -608,6 +614,8 @@ footer a:hover { color: var(--orange); }
 <script>
 /* Store picker. A store whose url is empty shows as "Link coming soon". */
 window.MX_STORE_PAGE = {
+  primary: 'Gumroad',
+  inFrame: 'Blender Market',
   product: 'Launch offer · 38% off',
   sub: 'The same MatricX Bundle on every store. Pick your tier in the store’s selector.',
   stores: [
@@ -618,16 +626,26 @@ window.MX_STORE_PAGE = {
 };
 </script>
 <script>
-/* Store picker, shared by the product pages.
-   A page sets window.MX_STORE_PAGE = { product, sub, stores: [{ name, url, note }] } before loading this file.
-   Every element with [data-store-picker] opens the choice. A store without a url shows as "Link coming soon", so a link is never guessed.
-   Without JavaScript (or <dialog> support) a buy button simply follows its own href. */
+/* Buy buttons: straight to the main store (Gumroad); inside a store listing (the page is shown in a frame) to that
+   listing's store (Blender Market). Elements with [data-other-stores] open the store picker; they are hidden in a frame.
+   A page sets window.MX_STORE_PAGE = { product, sub, primary, inFrame, stores: [{ name, url, note }] } before this file.
+   A store without a url shows as "Link coming soon" in the picker, so a link is never guessed. */
 (function () {
   var cfg = window.MX_STORE_PAGE;
   if (!cfg) return;
   var stores = (cfg.stores || []).filter(Boolean);
   var live = stores.filter(function (s) { return s.url; });
-  if (!stores.length) return;
+  if (!live.length) return;
+  var framed = false;
+  try { framed = window.self !== window.top; } catch (e) { framed = true; }
+  var byName = function (name) { return live.filter(function (s) { return s.name === name; })[0]; };
+  var main = (framed ? byName(cfg.inFrame) : byName(cfg.primary)) || live[0];
+  document.querySelectorAll('[data-store-picker]').forEach(function (b) {
+    b.href = main.url; b.target = '_blank'; b.rel = 'noopener';
+  });
+
+  var others = document.querySelectorAll('[data-other-stores]');
+  if (framed) { others.forEach(function (a) { a.hidden = true; }); return; }
 
   var esc = function (t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; };
   var dlg = document.createElement('dialog');
@@ -656,17 +674,13 @@ window.MX_STORE_PAGE = {
       '<p class="stores-foot">Checkout, payment and refunds are handled by the store you choose.</p>' +
     '</div>';
   document.body.appendChild(dlg);
-
-  var buttons = document.querySelectorAll('[data-store-picker]');
-  // Buttons point at the first available store even without the picker.
-  if (live.length) buttons.forEach(function (b) { b.href = live[0].url; });
   if (typeof dlg.showModal !== 'function') return;
 
   var opener = null;
-  buttons.forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
+  others.forEach(function (a) {
+    a.addEventListener('click', function (e) {
       e.preventDefault();
-      opener = btn;
+      opener = a;
       dlg.showModal();
       var first = dlg.querySelector('a.store');
       if (first) first.focus();
